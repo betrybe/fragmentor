@@ -1,0 +1,37 @@
+name: Fragmentor CI
+on: [push]
+
+jobs:
+  linter:
+    name: Linter Checks
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        elixir: [1.13.3]
+        otp: [24.3.3]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check formatting
+        run: mix format --check-formatted
+
+      - name: Compile code
+        run: mix compile --warnings-as-errors --all-warnings
+
+  test:
+    name: Tests Checks
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        elixir: [1.13.3]
+        otp: [24.3.3]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Run tests
+        run: mix coveralls.github

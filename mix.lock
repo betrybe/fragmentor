@@ -1,0 +1,4 @@
+%{
+  "earmark": {:hex, :earmark, "1.4.24", "1923e201c3742af421860b983560967cc3e3deacc59c12966bc991a5435565e6", [:mix], [{:earmark_parser, "~> 1.4.25", [hex: :earmark_parser, repo: "hexpm", optional: false]}], "hexpm", "9724242f241f2ad634756d8f2bb57a3d0992cedd10c51842fa655703b4da7c67"},
+  "earmark_parser": {:hex, :earmark_parser, "1.4.25", "2024618731c55ebfcc5439d756852ec4e85978a39d0d58593763924d9a15916f", [:mix], [], "hexpm", "56749c5e1c59447f7b7a23ddb235e4b3defe276afc220a6227237f3efe83f51e"},
+}
