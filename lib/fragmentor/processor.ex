@@ -34,7 +34,6 @@ defmodule Fragmentor.Processor do
     |> Utils.remove_hr_inner_class()
   end
 
-
   ## ToDo Adicionar tratamento de erro aqui
   @spec to_fragments(binary(), list()) ::
           {:ok, [Code.t() | Video.t() | Html.t()]} | {:error, String.t()}

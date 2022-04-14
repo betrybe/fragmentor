@@ -1,0 +1,19 @@
+<p>Imagine que você está desenvolvendo um sistema que deverá comparar se duas frases são iguais. Para isso, é definida a
+    mesma frase, e o output deverá ser igual, por se tratar de frases idênticas. Nessas situações, é importante saber em
+    qual posição houve a primeira ocorrência de um caractere ou texto. Para conseguirmos resolver esse problema, é hora
+    de aprender a utilizar o método <code class="inline">indexOf</code> da classe <code class="inline">String</code>.\n⚠
+    <em>Antes de prosseguir, lembre-se de que uma <code class="inline">String</code> nada mais é do que um array de
+        caracteres, onde cada posição desse array
+        contém um caractere.</em>
+</p>
+<iframe src="https://player.vimeo.com/video/677241568?h=fa10b08e7c" width="640" height="360" frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"></iframe>
+<p>Veja mais um exemplo:</p>
+<p>Vamos começar utilizando <code class="inline">minhaString.indexOf(meuCaracter)</code> para que a função retorne o
+    índice, ou seja, a posição da primeira ocorrência do caractere na string dada. Confira como fazer isso no código
+    abaixo:</p>
+<pre><code class="java">String saudacao = &quot;Olá, Mundo!&quot;;\n\nSystem.out.println(saudacao.indexOf(&#39;M&#39;)); // imprime: 5</code></pre>
+<p>Note que o uso do método <code class="inline">minhaString.indexOf</code> nos permitiu fazer a busca pela ocorrência
+    de um caractere, nome ou texto.</p>
+<p>Vamos pegar mais um exemplo:</p>
+<pre><code class="java">String lorem = &quot;Lorem ipsum dolor sit amet&quot;;\n\nSystem.out.println(lorem.indexOf(&#39;s&#39;, 10)); // imprime: 18</code></pre>

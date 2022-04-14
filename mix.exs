@@ -43,7 +43,7 @@ defmodule Fragmentor.MixProject do
   defp package do
     [
       maintainers: [
-        "Víctor Caciquinho Pereira",
+        "Víctor Caciquinho Pereira"
       ],
       files: ~w(lib .formatter.exs mix.exs README* LICENSE*),
       licenses: ["Apache-2.0"],
