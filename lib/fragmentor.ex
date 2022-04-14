@@ -15,11 +15,29 @@ defmodule Fragmentor do
   defdelegate to_fragments(markdown, options \\ []), to: Fragmentor.Processor
 
   @doc """
+  Converts Markdown text directly to a fragmented HTML
+
+   Raises `Error` if the Content object does not exist.
+  """
+  defdelegate to_fragments!(markdown, options \\ []), to: Fragmentor.Processor
+
+  @doc """
   Convert Markdown text directly to raw HTML
+
+  ## Example
+      iex> to_html("*markdown content*", compact_output: true)
+      {:ok, "<p><em>markdown content</em></p>"}
+  """
+  defdelegate to_html(markdown, options \\ []), to: Fragmentor.Processor
+
+  @doc """
+  Convert Markdown text directly to raw HTML
+
+  Raises `Error` if the Content object does not exist.
 
   ## Example
       iex> to_html("*markdown content*", compact_output: true)
       "<p><em>markdown content</em></p>"
   """
-  defdelegate to_html(markdown, options \\ []), to: Fragmentor.Processor
+  defdelegate to_html!(markdown, options \\ []), to: Fragmentor.Processor
 end
