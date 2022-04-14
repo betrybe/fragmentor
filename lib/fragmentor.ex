@@ -36,7 +36,7 @@ defmodule Fragmentor do
   Raises `Error` if the Content object does not exist.
 
   ## Example
-      iex> to_html("*markdown content*", compact_output: true)
+      iex> to_html!("*markdown content*", compact_output: true)
       "<p><em>markdown content</em></p>"
   """
   defdelegate to_html!(markdown, options \\ []), to: Fragmentor.Processor
