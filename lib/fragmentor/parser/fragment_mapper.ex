@@ -8,7 +8,7 @@ defmodule Fragmentor.Parser.HtmlParser.FragmentMapper do
   @code_starting "<pre"
   @code_pattern ~r/<pre><code\s+class="(.+)?">([\s\S]+)+?<\/code><\/pre>/
 
-  @video_starting "<iframe"
+  @video_starting "<a href"
   @video_pattern ~r/http(?:s)?:\/\/(?:www\.)?.+(youtube|vimeo).+\/(?:embed|video)\/(.+?)(?:"|\?)/
 
   @spec to_struct(String.t()) :: %{

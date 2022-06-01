@@ -4,8 +4,8 @@ defmodule Fragmentor.Parser.HtmlParser.ContentSplitter do
   whenever there is a code or video tag
   """
   @delimiter "*****"
-  @starting_pattern ~r/(<pre|<iframe)/
-  @ending_pattern ~r/(<\/pre>|<\/iframe>)/
+  @starting_pattern ~r/(<pre|<a href)/
+  @ending_pattern ~r/(<\/pre>|<\/a>)/
 
   @spec split(String.t()) :: list(String.t())
   def split(html_content) do
