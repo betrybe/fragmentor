@@ -3,7 +3,7 @@ defmodule Fragmentor.Parser.HtmlParser.ContentSplitter do
   Module responsible for splitting html texts into a list
   whenever there is a code or video tag
   """
-  @delimiter "*****"
+  @delimiter "(353d9062\-7872\-4d64\-91b7\-f3959a0bf49d)"
   @starting_pattern ~r/(<pre|<iframe)/
   @ending_pattern ~r/(<\/pre>|<\/iframe>)/
 
