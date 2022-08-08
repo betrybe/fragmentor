@@ -12,6 +12,14 @@ defmodule Fragmentor.Utils do
   end
 
   @doc """
+  Add html target="_blank" on links being parsed
+  """
+  @spec add_target_blank_on_links(binary()) :: binary()
+  def add_target_blank_on_links(html_content) do
+    String.replace(html_content, "<a", "<a target=\"_blank\"")
+  end
+
+  @doc """
   Removes html hr tag class values
   """
   @spec remove_hr_inner_class(binary()) :: binary()
