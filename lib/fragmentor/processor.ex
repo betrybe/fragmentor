@@ -16,8 +16,9 @@ defmodule Fragmentor.Processor do
 
   def to_html(markdown, options) do
     with {:ok, html_doc, _} <- Earmark.as_html(markdown, options),
-         html_sanitized <- Utils.remove_hr_inner_class(html_doc) do
-      {:ok, html_sanitized}
+         html_sanitized <- Utils.remove_hr_inner_class(html_doc),
+         html_with_target_blank_links <- Utils.add_target_blank_on_links(html_sanitized) do
+      {:ok, html_with_target_blank_links}
     else
       {:error, _html_doc, error_messages} -> {:error, error_messages}
     end
@@ -32,6 +33,7 @@ defmodule Fragmentor.Processor do
     markdown
     |> Earmark.as_html!(options)
     |> Utils.remove_hr_inner_class()
+    |> Utils.add_target_blank_on_links()
   end
 
   ## ToDo Adicionar tratamento de erro aqui
