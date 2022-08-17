@@ -79,7 +79,7 @@ The auto generated docs can be found at [https://hexdocs.pm/fragmentor](https://
 
 ## How to use Fragmentor
 
-There are two available functions and their bang counterparts options according the elixir common practices:
+There are two available functions and their trailing bang counterparts options according the [elixir common practices](https://hexdocs.pm/elixir/main/naming-conventions.html):
 
 - `Fragmentor.to_html(markdown, options \\ [])`
 - `Fragmentor.to_html!(markdown, options \\ [])`
