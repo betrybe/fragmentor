@@ -84,7 +84,7 @@ There are two available functions and their trailing bang counterparts options a
 - `Fragmentor.to_html(markdown, options \\ [])`
 - `Fragmentor.to_html!(markdown, options \\ [])`
 - `Fragmentor.to_fragments(markdown, options \\ [])`
-- `Fragmentor.to_html(markdown, options \\ [])`
+- `Fragmentor.to_fragments!(markdown, options \\ [])`
 
 The `to_html/2` function takes a `markdown` text, convert it to `html` using `earmark` and apply some post processings such making every link target blank.
 
