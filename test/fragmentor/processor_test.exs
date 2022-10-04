@@ -42,6 +42,30 @@ defmodule Fragmentor.ProcessorTest do
     }
   ]
 
+  @embedded_fragments [
+    %Fragmentor.Fragment.Html{
+      content:
+        "<h1>Incorporando projetos</h1>\n\n<p>\n    A incorporação é uma maneira de exibir um editor StackBlitz em uma página de documentação, uma postagem de blog ou qualquer outra página. Esta página orienta você pela incorporação manual em iframes. Você também pode fazer isso <a href=\"https://developer.stackblitz.com/docs/platform/javascript-sdk/\"></a>programaticamente usando nosso SDK</p>a>.\n</p>\n\n<h2>Incorporando o projeto StackBlitz em uma página</h2>\n\n<p>Os arquivos de código são interativos, além do que a aplicação renderizada também é interativa.</p>\n\n",
+      fragment_type: "html"
+    },
+    %Fragmentor.Fragment.Html{
+      fragment_type: "html",
+      content:
+        "<iframe src=\"https://stackblitz.com/edit/react-ts-mtfg3e?embed=1&file=App.tsx\"></iframe>"
+    },
+    %Fragmentor.Fragment.Html{
+      content:
+        "\n\n<h1>ElixirConf 2022 - José Valim - Elixir v1.14</h1>\n\n<p>\n    José Valim (Dashbit) faz a palestra de abertura da ElixirConf US 2022.\n</p>\n\n",
+      fragment_type: "html"
+    },
+    %Fragmentor.Fragment.Video{
+      fragment_type: "video",
+      provider: "youtube",
+      url: "https://www.youtube.com/embed/KmLw58qEtuM\"",
+      video_id: "KmLw58qEtuM"
+    }
+  ]
+
   describe "to_html/2" do
     test "returns correct html from received markdown" do
       markdown_content = File.read!("test/support/fixtures/markdown/java_content.md")
@@ -55,6 +79,11 @@ defmodule Fragmentor.ProcessorTest do
     test "returns correct fragments of received html" do
       html_content = File.read!("test/support/fixtures/html/multiple_fragments.html")
       assert Processor.to_fragments!(html_content) == @fragments
+    end
+
+    test "returns embedded iframe html with video fragments correctly" do
+      html_content = File.read!("test/support/fixtures/html/embedded_iframe_fragments.html")
+      assert Processor.to_fragments!(html_content) == @embedded_fragments
     end
   end
 end
