@@ -4,7 +4,7 @@ defmodule Fragmentor.MixProject do
   def project do
     [
       app: :fragmentor,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -35,8 +35,6 @@ defmodule Fragmentor.MixProject do
       {:earmark, "~> 1.4.24"},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:jason, "~> 1.1"}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]
   end
 
