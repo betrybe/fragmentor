@@ -1,66 +1,153 @@
 # Fragmentor
 
+[![Hex.pm](https://img.shields.io/hexpm/v/fragmentor.svg)](https://hex.pm/packages/fragmentor)
+[![Hex.pm](https://img.shields.io/hexpm/dw/fragmentor.svg)](https://hex.pm/packages/fragmentor)
+[![Hex.pm](https://img.shields.io/hexpm/dt/fragmentor.svg)](https://hex.pm/packages/fragmentor)
+
 Fragmentor helps to render `markdown` on web browsers.
-It takes a raw markdown text as input, translate it to `html` using  [earmark](https://github.com/pragdave/earmark) and then create chunks of html code objects.
+It takes a raw markdown text as input, translate it into `html` using  [Earmark](https://github.com/pragdave/earmark) and then create chunks of html code objects.
 
 ## Chunk types
 
-Currently there are three types of chunk:
+Currently there are three types of chunk that can be transformed into fragments. Let's see each of them.
 
 ### Code chunk
 
-A markdown code text taken as input:
+Imagine a markdown code text with syntax highlighting taken as input. Example:
 
+~~~elixir
+snippet_code = """
+```elixir
+my_map = %{name: "foo", age: 23}
+```
+"""
 ~~~
- ```elixir
- my_map = %{name: foo, age: 23}
- ```
-~~~
+
+And when you execute the code bellow:
+
+```elixir
+snippet_code |> Fragmentor.to_html!()
+```
+
+It translates into:
+
+```elixir
+"<pre><code class=\"elixir\">my_map = %{name: &quot;foo&quot;, age: 23}</code></pre>\n"
+```
+
+You can also transform to `html` and then to a code fragment. Like this:
+
+```elixir
+snippet_code |> Fragmentor.to_html!() |> Fragmentor.to_fragments!()
+```
 
 Produces the following object output:
 
 ```elixir
+[
   %Fragmentor.Fragment.Code{
+    content: "my_map = %{name: &quot;foo&quot;, age: 23}",
     fragment_type: "code",
-    language: "elixir",
-    content: "my_map = %{name: foo, age: 23}"
+    language: "elixir"
   }
+]
 ```
 
 ### Video chunk
 
-An html video iframe placed in markdown
+An `html` video iframe placed in markdown. Like:
 
-```html
-  <iframe src="https://player.vimeo.com/video/675564253?h=588f932258" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+~~~elixir
+html_fragment = """
+```
+  <iframe src="https://player.vimeo.com/video/754466968" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+```
+"""
+~~~
+
+It translates into:
+
+```elixir
+"<pre><code class=\"html\">  &lt;iframe src=&quot;https://player.vimeo.com/video/754466968&quot; width=&quot;640&quot; height=&quot;360&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</code></pre>\n"
+```
+
+And you can transform to a video fragment. Let's see:
+
+```elixir
+html_fragment |> Fragmentor.to_fragments!()
 ```
 
 Produces the following object output:
 
 ```elixir
+[
   %Fragmentor.Fragment.Video{
     fragment_type: "video",
     provider: "vimeo",
     url: "https://player.vimeo.com/video/675564253?",
     video_id: "675564253"
-  }
+  },
+]
 ````
 
 ### Html content chunk
 
 Other general markdown texts
 
-```markdown
+~~~elixir
+markdown_text = """
+```
   hello it`s an markdown
+```
+"""
+~~~
+
+Let's transform to a markdown text. Like this:
+
+```elixir
+markdown_text |> Fragmentor.to_fragments!()
 ```
 
 Produces the following object output:
 
 ```elixir
- Fragmentor.Fragment.Html{
-    fragment_type: "html",
-    content: "hello it`s a markdown",
+[
+  %Fragmentor.Fragment.Html{
+    content: "```\n  hello it`s an markdown\n```\n",
+    fragment_type: "html"
   }
+]
+```
+
+#### Iframe
+
+We can also embed another document in the current HTML document via the `<iframe>` tag. Embedding is a way to display an editor on a documentation page, a blog post, docs, spreadsheets, Google presentations, or any other page.
+
+Imagine we have this piece of code:
+
+~~~elixir
+html_fragment = """
+```
+<iframe src="https://stackblitz.com/edit/react-ts-mtfg3e?embed=1&file=App.tsx" width="640" height="360"></iframe>
+```
+"""
+~~~
+
+And we transform to a simple `html` fragment. Like this:
+
+```elixir
+html_fragment |> Fragmentor.to_fragments!()
+```
+
+That produces the following output:
+
+```elixir
+[
+  %Fragmentor.Fragment.Html{
+    content: "<iframe src=\"https://stackblitz.com/edit/react-ts-mtfg3e?embed=1&file=App.tsx\" width=\"640\" height=\"360\"></iframe>",
+    fragment_type: "html"
+  },
+]
 ```
 
 ## Installation
