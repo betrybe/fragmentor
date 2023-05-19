@@ -46,7 +46,9 @@ jobs:
 
       - name: Create PLTs
         if: steps.plt_cache.outputs.cache-hit != 'true'
-        run: mix dialyzer --plt
+        run: |
+          mkdir -p priv/plts
+          mix dialyzer --plt
 
       - name: Save PLT cache
         id: plt_cache_save
