@@ -3,7 +3,7 @@ defmodule Fragmentor.ProcessorTest do
 
   doctest Fragmentor.Processor
 
-  alias Fragmentor.Fragment.{Code, Video, Html}
+  alias Fragmentor.Fragment.{Code, Html, Video}
   alias Fragmentor.Processor
 
   @fragments [

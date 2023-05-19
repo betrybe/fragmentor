@@ -3,9 +3,9 @@ defmodule Fragmentor.Processor do
   Internal module responsible for processing parsing operations
   """
 
-  alias Fragmentor.Utils
+  alias Fragmentor.Fragment.{Code, Html, Video}
   alias Fragmentor.Parser.HtmlParser
-  alias Fragmentor.Fragment.{Code, Video, Html}
+  alias Fragmentor.Utils
 
   @spec to_html(binary(), list()) :: {:error, list} | {:error, String.t()} | {:ok, binary}
   def to_html(markdown, options \\ [compact_output: true])
