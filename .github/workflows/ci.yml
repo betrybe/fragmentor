@@ -3,35 +3,38 @@ on: [push]
 
 jobs:
   linter:
-    name: Linter Checks
+    name: Tests/Lintes Checks
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        elixir: [1.13.3]
-        otp: [24.3.3]
+        os: [ubuntu-latest]
+        elixir: [1.13.3, 1.14.4]
+        otp: [24.3.3, 25.3.2]
 
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Check formatting
-        run: mix format --check-formatted
-
-      - name: Compile code
-        run: mix compile --warnings-as-errors --all-warnings
-
-  test:
-    name: Tests Checks
-    strategy:
-      matrix:
-        os: [ubuntu-20.04]
-        elixir: [1.13.3]
-        otp: [24.3.3]
-    steps:
-      - uses: actions/checkout@v2
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          elixir-version: ${{ matrix.elixir }}
 
       - name: Install dependencies
         run: mix deps.get
 
+      - name: Compile code
+        run: mix compile --warnings-as-errors --all-warnings
+
+      - name: Check formatting
+        run: mix format --check-formatted
+
+      - name: Run Credo
+        run: mix credo --strict
+
+      - name: Run Dialyzer
+        run: mix dialyzer --force-check --format github
+
       - name: Run tests
         run: mix coveralls.github
+
