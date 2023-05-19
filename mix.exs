@@ -8,9 +8,17 @@ defmodule Fragmentor.MixProject do
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      dialyzer: dialyzer(),
       deps: deps(),
       package: package(),
       description: description()
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_core_path: "priv/plts",
+      plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
     ]
   end
 
@@ -32,9 +40,7 @@ defmodule Fragmentor.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:earmark, "~> 1.4.24"},
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
-      {:jason, "~> 1.1"}
+      {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
     ]
   end
 
