@@ -1,10 +1,11 @@
 defmodule Fragmentor.MixProject do
+  @moduledoc false
   use Mix.Project
 
   def project do
     [
       app: :fragmentor,
-      version: "0.3.0",
+      version: "0.4.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -40,6 +41,9 @@ defmodule Fragmentor.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:earmark, "~> 1.4.38"},
+      {:jason, "~> 1.4"},
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
       {:dialyxir, "~> 1.3", only: [:dev], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
